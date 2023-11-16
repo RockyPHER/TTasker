@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* global.css */
+
+body {
+    background-image: url('/bg.jpg');
+  }
+ 
+  .blur {
+    filter: blur(8px); /* Adjust the blur value as needed */
+  }
