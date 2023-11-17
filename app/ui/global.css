@@ -8,6 +8,3 @@ body {
     background-image: url('/bg.jpg');
   }
  
-  .blur {
-    filter: blur(8px); /* Adjust the blur value as needed */
-  }

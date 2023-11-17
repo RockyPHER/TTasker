@@ -2,7 +2,7 @@ import Task from "./Task";
 
 export default function Stack() {
     return (
-        <div className="bg-transparent border-slate-500 border-2 border-solid bg-blur h-[96.5vh] w-1/4 m-3 rounded-xl shadow-xl">
+        <div className="bg-transparent border-slate-500 border-2 border-solid h-[96.5vh] w-1/4 m-3 rounded-xl shadow-xl">
                 <div className="flex justify-center w-full"><h1 className="text-3xl p-5 text-white">Stack</h1></div>
                 <div className="flex flex-col w-full h-[85%] justify-between">
                     <ul>
