@@ -1,5 +1,5 @@
 # Ttasker
-| :---: | :---: |
+|:---:|:---:|
 |![ProjectImage](/public/ProjectImage.png)|![FigmaImage](public/FigmaImplementation.png)|
 
 ## What is ttasker?
