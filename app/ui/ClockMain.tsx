@@ -1,5 +1,5 @@
-import PlayIcon from "../../public/play.svg";
 import ClockCurrentTask from "./ClockCurrentTask";
+import Buttons from "./ClockButtons";
 
 interface ClockProps {
   minutes: string;
@@ -26,11 +26,7 @@ export function Clock({ minutes, seconds }: ClockProps) {
         </span>
       </div>
 
-      <div className="flex justify-center">
-        <button className="border-transparent border-2 rounded-xl hover:border-white hover:border-opacity-40 active:bg-gray-300 active:bg-opacity-60">
-          <PlayIcon className="h-16 w-28 p-1 my-1 mx-3"/>
-        </button>
-      </div>
+     <Buttons/>
       
       <ClockCurrentTask />
 
