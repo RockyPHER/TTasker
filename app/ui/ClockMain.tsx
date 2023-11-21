@@ -1,5 +1,6 @@
 import ClockCurrentTask from "./ClockCurrentTask";
 import Buttons from "./ClockButtons";
+import { useState } from "react";
 
 interface ClockProps {
   minutes: string;
