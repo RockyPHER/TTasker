@@ -4,7 +4,7 @@ import Play from "/public/play.svg";
 
 export default function Buttons() {
   return (
-    <div className="flex justify-evenly space-x-16">
+    <div className="flex justify-center space-x-16">
       <div className="flex items-center justify-center">
         <button className="rounded-md bg-gray-100 hover:bg-white active:bg-gray-400 bg-opacity-50 hover:bg-opacity-40 active:bg-opacity-50 px-3 py-1">
           <Stop className="h-12 w-16" />

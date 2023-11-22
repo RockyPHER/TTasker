@@ -1,11 +1,22 @@
+"use client";
 import Task from "./Task";
 import { useState } from "react";
-
+import AddIcon from "../../public/plus.svg";
 interface TabNameProps {
   TabName: string;
 }
 
 export default function Stack({ TabName }: TabNameProps) {
+
+  const [tasks , setTasks] = useState([]);
+
+  const handleAddTask = () => {
+
+    setTasks();
+    
+  }
+  
+
   return (
     <div className="bg-[#f1f1f1] bg-opacity-25 h-[96.5vh] w-[300px] m-3 rounded-xl shadow-xl shadow-black">
       <div className="flex justify-center w-full">
@@ -15,26 +26,11 @@ export default function Stack({ TabName }: TabNameProps) {
       </div>
       <div className="flex flex-col w-full h-[85%] justify-between">
         <ul>
-          <Task
-            time={"15:00"}
-            title={"Touch some grass"}
-            description={"Get out of the PC and breath some air"}
-          />
+          if{}
         </ul>
         <div className="flex w-full justify-center">
-          <button
-            className="hover:bg-gray-500 hover:bg-opacity-50 
-                                       active:bg-gray-600 active:bg-opacity-70
-                                         p-[5px] border-2 border-solid border-white border-opacity-40 text-[3rem] text-white rounded-[500px]"
-            style={{
-              paddingBottom: "7px",
-              aspectRatio: "1/1",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            +
+          <button onClick={handleAddTask} className="h-14 w-14">
+            <AddIcon className="h-full w-full rounded-full border-transparent border-solid border-2 hover:border-white hover:border-opacity-50 active:bg-gray-300 active:bg-opacity-40 " />
           </button>
         </div>
       </div>
