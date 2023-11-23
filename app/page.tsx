@@ -1,5 +1,5 @@
-import { Clock } from "./ui/ClockMain";
-import Stack from "./ui/Stack";
+import { Clock } from "./ui/Clock/ClockMain";
+import Stack from "./ui/Stack/Stack";
 import "@/app/ui/global.css";
 
 export default function HomePage() {

@@ -1,19 +1,25 @@
 "use client";
 import Task from "./Task";
 import { useState } from "react";
-import AddIcon from "../../public/plus.svg";
+import AddIcon from "@/public/plus.svg";
 interface TabNameProps {
   TabName: string;
 }
 
 export default function Stack({ TabName }: TabNameProps) {
 
-  const [tasks , setTasks] = useState([]);
+  const [tasks , setTasks] = useState<({ time: string, title: string, description: string}[])>([]);
 
   const handleAddTask = () => {
 
-    setTasks();
-    
+    const newTask = {
+      time: "00:00",
+      title: "Task Title",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididu...."
+    }
+
+    setTasks([...tasks, newTask]);
+
   }
   
 
@@ -25,8 +31,14 @@ export default function Stack({ TabName }: TabNameProps) {
         </h1>
       </div>
       <div className="flex flex-col w-full h-[85%] justify-between">
-        <ul>
-          if{}
+        <ul className="flex flex-col space-y-3 p-2">
+          {tasks && tasks.map((task) => (
+            <Task
+              time={task.time}
+              title={task.title}
+              description={task.description}
+            />
+          ))}
         </ul>
         <div className="flex w-full justify-center">
           <button onClick={handleAddTask} className="h-14 w-14">

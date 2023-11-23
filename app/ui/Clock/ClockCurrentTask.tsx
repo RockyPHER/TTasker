@@ -1,7 +1,7 @@
 'use client'
 
-import CloseIcon from "../../public/close.svg";
-import OpenIcon from "../../public/plus.svg"
+import CloseIcon from "@/public/close.svg";
+import OpenIcon from "@/public/plus.svg"
 import { useState } from "react";
  
 
@@ -32,9 +32,7 @@ export default function ClockCurrentTask() {
         <span className="text-xl text-white ml-3 mt-2 select-none">
           CurrentTask
         </span>
-        <div className="bg-white bg-opacity-40 p-3 rounded h-[80%] m-3">
-          blabalababslabs
-        </div>
+        <div className="bg-white bg-opacity-40 p-3 rounded h-[80%] m-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididu....</div>
         <div className="absolute top-0 right-0 h-10 w-10 flex justify-center items-center">
           <button onClick={handleClose} className="p-1 rounded-full hover:bg-gray-400 hover:bg-opacity-40 active:bg-gray-500 active:bg-opacity-40">
             <CloseIcon className="h-6 w-6"/>
