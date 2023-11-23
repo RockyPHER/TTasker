@@ -1,5 +1,5 @@
 "use client";
-import Task from "./Task";
+import TaskMain from "./Task";
 import { useState } from "react";
 import AddIcon from "@/public/plus.svg";
 interface TabNameProps {
@@ -13,7 +13,7 @@ export default function Stack({ TabName }: TabNameProps) {
   const handleAddTask = () => {
 
     const newTask = {
-      time: "00:00",
+      time: "00:10",
       title: "Task Title",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididu...."
     }
@@ -32,12 +32,8 @@ export default function Stack({ TabName }: TabNameProps) {
       </div>
       <div className="flex flex-col w-full h-[85%] justify-between">
         <ul className="flex flex-col space-y-3 p-2">
-          {tasks && tasks.map((task) => (
-            <Task
-              time={task.time}
-              title={task.title}
-              description={task.description}
-            />
+          {tasks && tasks.map((Task) => (
+            <TaskMain time={Task.time} title={Task.title} description={Task.description} />
           ))}
         </ul>
         <div className="flex w-full justify-center">

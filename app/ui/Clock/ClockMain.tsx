@@ -9,26 +9,31 @@ interface ClockProps {
   task: Task;
 }
 
-function convertTime(task : {time: string}) {
-  const [minutes, seconds] = task.time.split(":");
-  return Number(minutes) * 60 + Number(seconds);
-}
-
-
 export function Clock({ task }: ClockProps) {
 
-  const [clockTimer, setClockTimer] = useState(0);
-
-  useEffect(() => {
-
+  const [minutes, seconds] = task.time.split(":");
   
-
-  }, [clockTimer]);
-
+  const [clockTimer, setClockTimer] = useState(Number(minutes) * 60 + Number(seconds));
 
   function oCStartHandler() {
-    setClockTimer(clockTimer + 1);
+
+    const timer = setInterval(() => {
+      setClockTimer(clockTimer - 1);
+
+      if (clockTimer === 0) {
+        clearInterval(timer);
+      }
+    }, 1000)
+
   }
+
+  useEffect(() => {
+    
+    
+    
+  }, [clockTimer]);
+  
+  
 
   return (
     <div className="flex flex-col justify-evenly space-y-2 w-[45vw]">
