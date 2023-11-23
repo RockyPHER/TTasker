@@ -1,12 +1,35 @@
+"use client";
+
 import ClockCurrentTask from "./ClockCurrentTask";
 import Buttons from "./ClockButtons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Task } from "../Stack/Task";
 
 interface ClockProps {
-  minutes: string;
-  seconds: string;
+  task: Task;
 }
-export function Clock({ minutes, seconds }: ClockProps) {
+
+function convertTime(task : {time: string}) {
+  const [minutes, seconds] = task.time.split(":");
+  return Number(minutes) * 60 + Number(seconds);
+}
+
+
+export function Clock({ task }: ClockProps) {
+
+  const [clockTimer, setClockTimer] = useState(0);
+
+  useEffect(() => {
+
+  
+
+  }, [clockTimer]);
+
+
+  function oCStartHandler() {
+    setClockTimer(clockTimer + 1);
+  }
+
   return (
     <div className="flex flex-col justify-evenly space-y-2 w-[45vw]">
 
@@ -28,10 +51,10 @@ export function Clock({ minutes, seconds }: ClockProps) {
         </span>
       </div>
 
-      <Buttons />
+      <Buttons StartTimer={oCStartHandler} StopTimer={() => {}} SkipTimer={() => {}} />
 
       <div className="flex justify-center items-end pb-10 h-[45vh] w-full">
-        <ClockCurrentTask />
+        <ClockCurrentTask  />
       </div>
 
     </div>

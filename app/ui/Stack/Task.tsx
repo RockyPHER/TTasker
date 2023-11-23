@@ -1,17 +1,20 @@
 "use client";
 import { MouseEventHandler, useState } from "react";
 
-interface TaskProps {
+export interface Task {
     time: string
     title: string
     description?: string
+}
+interface TaskProps {
+    task: Task
 }
 
 interface TaskOpenProps extends TaskProps {
     handleClick: MouseEventHandler<HTMLAnchorElement>
 }
 
-export default function TaskMain({time, title, description} : TaskProps) {
+export default function TaskMain({task} : TaskProps) {
 
     const [IsResumed, setIsResumed] = useState<boolean>(true);
 
@@ -22,10 +25,10 @@ export default function TaskMain({time, title, description} : TaskProps) {
     const CheckIfTaskResumed = (IsResumed: boolean):JSX.Element => {
 
         if (IsResumed) {
-            return <TaskResumed time={time} title={title} handleClick={handleClick}/>
+            return <TaskResumed task={task} handleClick={handleClick}/>
         }
 
-        return <TaskOpen time={time} title={title} description={description} handleClick={handleClick}/>
+        return <TaskOpen task={task} handleClick={handleClick}/>
         
     }
 
@@ -37,7 +40,7 @@ export default function TaskMain({time, title, description} : TaskProps) {
 }
 
 
-export function TaskOpen({time, title, description, handleClick} : TaskProps & TaskOpenProps){
+export function TaskOpen({task : {time, title, description}, handleClick} : TaskProps & TaskOpenProps){
     return (
         <li className="w-full">
             <a onClick={handleClick} className="cursor-pointer select-none flex justify-between items-center w-full h-12 bg-gray-100 px-3 rounded-t-md">
@@ -52,7 +55,7 @@ export function TaskOpen({time, title, description, handleClick} : TaskProps & T
 }
 
 
-export function TaskResumed({time, title, handleClick} : TaskProps & TaskOpenProps) {
+export function TaskResumed({task : {time, title}, handleClick} : TaskProps & TaskOpenProps) {
     return (
         <li className="select-none w-full">
             <a onClick={handleClick} className="cursor-pointer flex justify-between items-center w-full h-12 bg-gray-100 px-3 rounded-md">
