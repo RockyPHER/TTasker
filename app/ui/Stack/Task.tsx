@@ -6,6 +6,7 @@ export interface Task {
     title: string
     description?: string
 }
+
 interface TaskProps {
     task: Task
 }

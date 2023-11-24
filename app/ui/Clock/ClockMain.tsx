@@ -13,25 +13,9 @@ export function Clock({ task }: ClockProps) {
 
   const [minutes, seconds] = task.time.split(":");
   
-  const [clockTimer, setClockTimer] = useState(Number(minutes) * 60 + Number(seconds));
+  const [clockTimer, setClockTimer] = useState(0);
+  
 
-  function oCStartHandler() {
-
-    const timer = setInterval(() => {
-      setClockTimer(clockTimer - 1);
-
-      if (clockTimer === 0) {
-        clearInterval(timer);
-      }
-    }, 1000)
-
-  }
-
-  useEffect(() => {
-    
-    
-    
-  }, [clockTimer]);
   
   
 
