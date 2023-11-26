@@ -5,16 +5,20 @@ import AddIcon from "@/public/plus.svg";
 
 interface StackTabProps {
   TabName: string;
-  isRunStack: boolean;
+  // isRunStack: boolean;
 }
 
-export default function StackMain({ TabName }: TabNameProps) {
+interface StackFuncProps extends StackTabProps {
+  handleAddTask: () => void;
+}
+
+export default function StackMain({ TabName }: StackTabProps) {
 
   const [tasks , setTasks] = useState<({order: number, time: string, title: string, description?: string, isConcluded: boolean}[])>([]);
 
   const newTask = {
     order: tasks.length + 1,
-    time: "00:00",
+    time: "00:10",
     title: "Title",
     description: "Description",
     isConcluded: false
@@ -28,11 +32,15 @@ export default function StackMain({ TabName }: TabNameProps) {
   
 
   return (
+      <>
+        <StackComponent TabName="RunStack" handleAddTask={handleAddTask} />
+      </>
+  );
     
 }
 
 
-function StackComponent () {
+function StackComponent ({TabName, handleAddTask}: StackFuncProps) {
 
   return(
     <div className="bg-[#f1f1f1] bg-opacity-25 h-[96.5vh] w-[300px] m-3 rounded-xl shadow-xl shadow-black">

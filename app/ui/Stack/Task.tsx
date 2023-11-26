@@ -1,14 +1,17 @@
 "use client";
 import { MouseEventHandler, useState } from "react";
 
-export interface Task {
+export interface TaskTimeProps {
     time: string
+}
+
+export interface TaskInterface extends TaskTimeProps {
     title: string
     description?: string
 }
 
 interface TaskProps {
-    task: Task
+    task: TaskInterface
 }
 
 interface TaskOpenProps extends TaskProps {
