@@ -23,20 +23,29 @@ export default function Clock() {
   );
 }
 export function ClockTimer({ time }: TaskTimeProps) {
+  //Shows the current time on the clock
   const [minutes, setMinutes] = useState(time.split(":")[0]);
   const [seconds, setSeconds] = useState(time.split(":")[1]);
 
-  const SetTimeMs = () => Number(minutes) * 60 * 1000 + Number(seconds) * 1000;
+  const convertStringToMs = () => Number(minutes) * 60 * 1000 + Number(seconds) * 1000;
+  const convertMsToString = (timeMs: number) => {
+    const newMinutes = Math.floor(timeMs / 1000 / 60);
+    const newSeconds = Math.floor((timeMs / 1000) % 60);
 
-  const setTimeClock = (timeMs: number) => {
-    const minutes = Math.floor(timeMs / 1000 / 60);
-    const seconds = Math.floor((timeMs / 1000) % 60);
+    if (newMinutes < 10) {
+      setMinutes("0" + String(newMinutes));
+    } else {
+      setMinutes(String(newMinutes));
+    }
 
-    setMinutes(String(minutes));
-    setSeconds(String(seconds));
+    if (newSeconds < 10) {
+      setSeconds("0" + String(newSeconds));
+    } else {
+      setSeconds(String(newSeconds));
+    }
   };
 
-  const [clockTimer, setClockTimer] = useState(SetTimeMs);
+  const [timerValue, setTimerValue] = useState(convertStringToMs);
   const [runTimer, setRunTimer] = useState(false);
 
   const buttonHandler = () => {
@@ -44,18 +53,31 @@ export function ClockTimer({ time }: TaskTimeProps) {
   };
 
   useEffect(() => {
-      const interval = setInterval(() => {
-        var timeMs = clockTimer;
-        setClockTimer(clockTimer - 1000);
-        setTimeClock(timeMs);
-  
-        console.log(timeMs);
+
+    let interval: NodeJS.Timer;
+
+    if (runTimer) {
+      
+      interval = setInterval(() => {
+        setTimerValue((prevTimerValue) => prevTimerValue - 1000);
         
-        if (timeMs >= 0) {
-          clearInterval(interval);
-        }
+        // Use the callback form to ensure you get the updated state
+        setTimerValue((updatedTimerValue) => {
+          convertMsToString(updatedTimerValue);
+          console.log(updatedTimerValue);
+
+          if (updatedTimerValue <= 0) {
+            clearInterval(interval as NodeJS.Timeout);
+          }
+
+          return updatedTimerValue; // Return the updated value for React to use
+        });
       }, 1000);
-  }, [runTimer]);
+
+      return () => setRunTimer(false);
+      }
+  }, [, runTimer]);
+
 
   return (
     <>
