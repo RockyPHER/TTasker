@@ -52,8 +52,16 @@ export function ClockTimer({ time }: TaskTimeProps) {
   const [runTimer, setRunTimer] = useState(false);
 
   const playButtonHandler = () => {
-    setRunTimer(() => !runTimer);
-    runTimer ? setTimerValue(convertStringToMs) : setTimerValue((prevTimerValue) => prevTimerValue);
+    setRunTimer((prevRunTimer) => {
+      if (!prevRunTimer) {
+        setTimerValue(convertStringToMs);
+      }
+      return !prevRunTimer;
+    });
+
+    runTimer
+      ? setTimerValue(convertStringToMs)
+      : setTimerValue((prevTimerValue) => prevTimerValue);
   };
 
   const stopButtonHandler = () => {
@@ -61,7 +69,7 @@ export function ClockTimer({ time }: TaskTimeProps) {
   };
 
   useEffect(() => {
-    let interval: NodeJS.Timer;
+    let interval: undefined | NodeJS.Timeout;
 
     if (runTimer) {
       interval = setInterval(() => {
@@ -73,15 +81,18 @@ export function ClockTimer({ time }: TaskTimeProps) {
           console.log(updatedTimerValue);
 
           if (updatedTimerValue <= 0) {
+            setRunTimer(false);
             clearInterval(interval as NodeJS.Timeout);
           }
 
           return updatedTimerValue; // Return the updated value for React to use
         });
       }, 1000);
-
-      return () => setRunTimer(false);
+    } else {
+      clearInterval(interval as NodeJS.Timeout);
     }
+
+    return () => setRunTimer(false);
   }, [runTimer]);
 
   return (
@@ -104,6 +115,7 @@ export function ClockTimer({ time }: TaskTimeProps) {
         </span>
       </div>
       <Buttons
+        isPlay={[runTimer, setRunTimer]}
         StartTimer={playButtonHandler}
         StopTimer={stopButtonHandler}
         SkipTimer={() => {}}
