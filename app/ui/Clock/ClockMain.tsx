@@ -22,13 +22,16 @@ export default function Clock() {
     </div>
   );
 }
+
 export function ClockTimer({ time }: TaskTimeProps) {
   //Shows the current time on the clock
   const [minutes, setMinutes] = useState(time.split(":")[0]);
   const [seconds, setSeconds] = useState(time.split(":")[1]);
 
-  const convertStringToMs = () => Number(minutes) * 60 * 1000 + Number(seconds) * 1000;
-  const convertMsToString = (timeMs: number) => {
+  const convertStringToMs = () =>
+    Number(minutes) * 60 * 1000 + Number(seconds) * 1000;
+
+  const setMsToString = (timeMs: number) => {
     const newMinutes = Math.floor(timeMs / 1000 / 60);
     const newSeconds = Math.floor((timeMs / 1000) % 60);
 
@@ -48,22 +51,25 @@ export function ClockTimer({ time }: TaskTimeProps) {
   const [timerValue, setTimerValue] = useState(convertStringToMs);
   const [runTimer, setRunTimer] = useState(false);
 
-  const buttonHandler = () => {
-    setRunTimer(!runTimer);
+  const playButtonHandler = () => {
+    setRunTimer(() => !runTimer);
+    runTimer ? setTimerValue(convertStringToMs) : setTimerValue((prevTimerValue) => prevTimerValue);
+  };
+
+  const stopButtonHandler = () => {
+    setRunTimer(false);
   };
 
   useEffect(() => {
-
     let interval: NodeJS.Timer;
 
     if (runTimer) {
-      
       interval = setInterval(() => {
         setTimerValue((prevTimerValue) => prevTimerValue - 1000);
-        
+
         // Use the callback form to ensure you get the updated state
         setTimerValue((updatedTimerValue) => {
-          convertMsToString(updatedTimerValue);
+          setMsToString(updatedTimerValue);
           console.log(updatedTimerValue);
 
           if (updatedTimerValue <= 0) {
@@ -75,9 +81,8 @@ export function ClockTimer({ time }: TaskTimeProps) {
       }, 1000);
 
       return () => setRunTimer(false);
-      }
-  }, [, runTimer]);
-
+    }
+  }, [runTimer]);
 
   return (
     <>
@@ -99,11 +104,10 @@ export function ClockTimer({ time }: TaskTimeProps) {
         </span>
       </div>
       <Buttons
-        StartTimer={buttonHandler}
-        StopTimer={() => {}}
+        StartTimer={playButtonHandler}
+        StopTimer={stopButtonHandler}
         SkipTimer={() => {}}
       />
     </>
   );
 }
-
