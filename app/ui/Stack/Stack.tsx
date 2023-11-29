@@ -1,5 +1,5 @@
 "use client";
-import TaskMain from "./Task";
+import TaskMain, { TaskInterface } from "./Task";
 import { useState } from "react";
 import AddIcon from "@/public/plus.svg";
 
@@ -51,7 +51,9 @@ function StackComponent ({TabName, handleAddTask}: StackFuncProps) {
         </div>
         <div className="flex flex-col w-full h-[85%] justify-between">
           <ul className="flex flex-col space-y-3 p-2">
-            
+            {task.map((task: TaskInterface) => (
+              <TaskMain key={task.order} task={task} />
+            ))}
           </ul>
           <div className="flex w-full justify-center">
             <button onClick={handleAddTask} className="h-14 w-14">

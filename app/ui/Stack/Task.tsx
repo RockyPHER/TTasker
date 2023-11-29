@@ -6,6 +6,7 @@ export interface TaskTimeProps {
 }
 
 export interface TaskInterface extends TaskTimeProps {
+    order: Key | null | undefined;
     title: string
     description?: string
 }
